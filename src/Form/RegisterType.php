@@ -43,7 +43,7 @@ class RegisterType extends AbstractType
             ->add('password_confirm', PasswordType::class, [
                 'label' => 'Confirmez votre mot de passe',
                 'mapped' => false,
-                'atttr' => [
+                'attr' => [
                     'placeholder' => ''
                 ]
             ]) 
