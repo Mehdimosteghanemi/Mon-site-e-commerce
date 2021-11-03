@@ -38,19 +38,24 @@ class RegisterType extends AbstractType
                     'placeholder' => 'exemple@exemple.fr'
                 ]
             ])
-            ->add('password', PasswordType::class, [
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Le mot de passe et la confirmation doivent être identiques',
                 'label' => 'Votre mot de passe',
-                'attr' => [
-                    'placeholder' => ''
-                ]
+                'required' => true,
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de saisir votre mot de passe'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirmez votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Merci de confirmer votre mot de passe'
+                    ]
+                    ]
             ])
-            ->add('password_confirm', PasswordType::class, [
-                'label' => 'Confirmez votre mot de passe',
-                'mapped' => false,
-                'atttr' => [
-                    'placeholder' => ''
-                ]
-            ]) 
             ->add('submit', SubmitType::class, [
                 'label' => "S'inscrire"
             ])
