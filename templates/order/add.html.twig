@@ -1,22 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Valider ma commande - Ma petite boutique{% endblock %}
+{% block title %}Paiement de ma commande - Ma petite boutique{% endblock %}
 
 {% block content %}
-    <h2>Je passe ma commande</h2>
+    <h2>Mon récapitulatif</h2>
 
-    <p>Choississez vos préférences avant de passer votre commande sur la boutique.</p>
+    <p>Verifier vos informations avant de payer votre commande.</p>
     <hr>
 
     <div class="row">
         <div class="col-md-6">
+            Mon adresse de livraison<br>
 
-            {% set formHtml %}
-                {{ form_start(form, {action:path('order_recap')}) }}
-                {{ form_end(form) }}
-            {% endset %}
-
-            {{ formHtml|replace({"[br]" : "<br/>"})|raw }}
+            Mon transporteur
         </div>
         <div class="col-md-6">
             <div class="text-center">
@@ -34,7 +30,10 @@
                         </div>
                         <div class="col-8 my-auto">
                             {{ product.product.name }}<br/>
-                                <small> {{ product.product.subtitle }} </small>
+                                <small>
+                                    {{ product.product.subtitle }}
+                                    <br/>
+                                </small>
                         </div>
                         <div class="col-2 my-auto">
                             x {{ product.quantity }}
@@ -43,7 +42,7 @@
                 {% endfor %}
             </div>
 
-            
+            <a href="" class="btn btn-success btn-block mt-3">Payer</a>
         </div>
     </div>
 {% endblock %}
