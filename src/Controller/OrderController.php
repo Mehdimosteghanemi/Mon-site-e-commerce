@@ -9,6 +9,8 @@ use App\Form\OrderType;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,20 +51,20 @@ class OrderController extends AbstractController
      */
     public function add(Cart $cart, Request $request): Response
     {   
-
+        
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
         ]);
-
+        
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $date = new DateTimeImmutable();
             $carriers = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
-
+            
             if ($delivery->getCompany())
             {
                 $delivery_content .= '<br/>'.$delivery->getCompany();
@@ -73,7 +75,7 @@ class OrderController extends AbstractController
             $delivery_content .= '<br/>'.$delivery->getCountry();
             
             
-            // Save order Oder()
+            // Save order Order()
             $order = new Order();
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
@@ -81,23 +83,65 @@ class OrderController extends AbstractController
             $order->setCarrierPrice($carriers->getPrice());
             $order->setDelivery($delivery_content);
             $order->setIsPaid(0);
-
+            
             $this->entityManager->persist($order);
+            
+            
+            
+            Stripe::setApiKey('sk_test_51K0mRoIDAPOc5uODLkh5de8OOSr8l74Yyz4npihWKLkebspv9cz5ktwefuhliWPOyhf3pfsrsthtYOChG5M0Zlxv00PRSSib2k');
+            $YOUR_DOMAIN = 'http://localhost:8080/';
+            $productStripe = [];
+            $priceStripe = [];
 
+            
             // Save my products OrderDetails()
             foreach ($cart->getFull() as $product)
             {
+                
                 $orderDetails = new OrderDetails();
                 $orderDetails->setMyOrder($order);
                 $orderDetails->setProduct($product['product']->getName());
                 $orderDetails->setQuantity($product['quantity']);
                 $orderDetails->setPrice($product['product']->getPrice());
                 $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
+                
                 $this->entityManager->persist($orderDetails);
-            }
+                
+                $productStripe[] = \Stripe\Product::create([
+                    'name' => $product['product']->getName()
+                ]);
 
-            $this->entityManager->flush();
+                
+                $priceStripe[] = \Stripe\Price::create([
+                    'product' => $productStripe,
+                    'unit_amount' => $product['product']->getPrice(),
+                    'currency' => 'eur',
+                ]);
+                
+            }
             
+            dd($productStripe, $priceStripe);
+            // $this->entityManager->flush();
+            
+            
+            $checkout_session = \Stripe\Checkout\Session::create([
+                
+                'line_items' => [[
+                    
+                    'price' => $priceStripe,
+                    'quantity' => $product['quantity'],
+                    
+                    ]],
+                    
+                    'mode' => 'payment',
+                    'success_url' => $YOUR_DOMAIN . '/success.html',
+                    'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+
+            ]);
+
+            // \dump($checkout_session->url);
+            \dd($checkout_session);
+
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
@@ -110,3 +154,5 @@ class OrderController extends AbstractController
         
     }
 }
+
+
