@@ -42,7 +42,7 @@ class OrderCrudController extends AbstractCrudController
             TextField::new('carrierName', 'Transporteur'),
             MoneyField::new('carrierPrice', 'Frais de port')->setCurrency('EUR'),
             BooleanField::new('isPaid', 'Payée'),
-            ArrayField::new('orderDetails', 'Produits achetés')
+            ArrayField::new('orderDetails', 'Produits achetés')->hideOnIndex()
         ];
     }
     
