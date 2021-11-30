@@ -19,6 +19,15 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+    /**
+     * findSuccessOrders()
+     * allows to display the orders in the member's area and the user
+     */
+    public function findSuccessOrders()
+    {
+
+    }
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */
