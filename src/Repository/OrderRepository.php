@@ -23,9 +23,15 @@ class OrderRepository extends ServiceEntityRepository
      * findSuccessOrders()
      * allows to display the orders in the member's area and the user
      */
-    public function findSuccessOrders()
+    public function findSuccessOrders($user)
     {
-
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isPaid = 1')
+            ->andWhere('o.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
