@@ -7,6 +7,8 @@ use Mailjet\Resources;
 
 class Mail
 {
+    
+
     private $api_key = 'ef2b228354597e6d2e3dd90150c4f95a';
     private $api_key_secret = '67aa0a0c84acb5a8ceeddd51c0d016da';
 
@@ -38,7 +40,7 @@ class Mail
         ];
 
         $response = $mj->post(Resources::$Email, ['body' => $body]);
-        $response->success() && dd($response->getData());
+        $response->success();
 
     }
 }

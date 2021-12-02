@@ -15,10 +15,6 @@ class HomeController extends AbstractController
      */
     public function index(SessionInterface $session): Response
     {
-
-       $mail = new Mail();
-       $mail->send('mapetiteboutique@yopmail.com', 'med med', 'Mon premier mail', 'Et voici ton premier mail de la part de Symfony!');
-       
         return $this->render('home/index.html.twig');
     }
 }
