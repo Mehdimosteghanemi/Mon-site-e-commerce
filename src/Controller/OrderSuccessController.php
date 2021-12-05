@@ -43,10 +43,9 @@ class OrderSuccessController extends AbstractController
                 
             $content = "Bonjour ".$order->getUser()->getFirstname()."<br/>Merci pour votre commande.<br><br/>Profitez bien de vos artciles.<br><br/>
             Avec le code promo BIENVENUE2021";
-            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande Ma petite boutique est bien validée!', $content);
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande Ma petite boutique est bien validée !', $content);
 
         }
-        // Afficher les quelques informations de la commande de l'utilisateur
 
         return $this->render('order_success/index.html.twig', [
             'order'=> $order
