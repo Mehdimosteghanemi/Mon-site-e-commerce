@@ -69,4 +69,9 @@ body {
     background-color: #f4f8ff;
     padding: 20px;
     margin-top: 22px;
+
+.block-small {
+    max-width: 600px;
+    margin: 0 auto;
+
 }
