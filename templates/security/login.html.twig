@@ -22,9 +22,7 @@
         <label for="inputPassword">Mot de passe</label>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Ici, votre mot de passe" required>
     
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
     
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -41,7 +39,8 @@
             Se connecter
         </button>
         <hr>
-        <p class="text-center">Ou souhaitez-vous <a href=" {{ path('register') }} ">Créer un compte</a>?</p>
+        <p class="text-center">Vous avez oublié votre mot de passe ? Cliquez ici <a href=" {{ path('reset_password') }} ">mot de passe oublié</a>.</p>
+        <p class="text-center">Ou souhaitez-vous <a href=" {{ path('register') }} ">Créer un compte</a> ?</p>
     </form>
 </div>
 
