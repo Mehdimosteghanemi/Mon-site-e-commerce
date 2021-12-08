@@ -44,8 +44,8 @@
                             <img src="{{ asset('assets/img/plus.png') }}" height="10px" alt="Augmenter la quantité">
                         </a>
                     </td>
-                    <td> {{ (product.product.price/100) |number_format(2, ',', ' ') }}€ </td>
-                    <td>{{ (( product.product.price * product.quantity )/100) |number_format(2, ',', ' ') }}€</td>
+                    <td> {{ (product.product.price / 100) |number_format(2, ',', ' ') }}€ </td>
+                    <td>{{ (( product.product.price * product.quantity ) / 100) |number_format(2, ',', ' ') }}€</td>
                     <td>
                         <a href="{{ path('delete_to_cart', { 'id' : product.product.id}) }}">
                             <img src="{{ asset('assets/img/delete.png') }}" height="18px" alt="Supprimer mon produit">
@@ -61,7 +61,7 @@
 
         <div class="text-right mb-5">
             <b>Nombre de produit :</b> {{ cart|length }} <br>
-            <b>Total de mon panier :</b> {{ (total /100) |number_format(2, ',', ' ') }}€
+            <b>Total de mon panier :</b> {{ (total / 100) |number_format(2, ',', ' ') }}€
             <a href=" {{ path('order') }} " class="btn btn-success btn-block mt-3">Valider mon panier</a>
         </div>
     {% else %}
