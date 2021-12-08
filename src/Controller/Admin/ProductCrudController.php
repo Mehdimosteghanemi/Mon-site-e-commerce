@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -32,6 +32,7 @@ class ProductCrudController extends AbstractCrudController
                 ->setRequired(false), 
             TextField::new('subtitle'),
             TextareaField::new('description'),
+            BooleanField::new('isBest'),
             MoneyField::new('price')->setCurrency('EUR'), // we give a currency with -> setCurrency ()
             
             // CollectionField::new('category') used to add several categories to a product but here we only want to associate a category by product

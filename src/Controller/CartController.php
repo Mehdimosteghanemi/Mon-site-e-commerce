@@ -12,13 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
 
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     /**
      * @Route("/mon-panier", name="cart")
      */
