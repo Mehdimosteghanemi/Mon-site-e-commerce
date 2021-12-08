@@ -30,7 +30,7 @@ class ProductRepository extends ServiceEntityRepository
             ->createQueryBuilder('p')
             ->select('c', 'p')
             ->join('p.category', 'c');
-            
+
         if (!empty($search->categories)) {
             $query = $query
                 ->andWhere('c.id IN (:categories)')
@@ -40,10 +40,11 @@ class ProductRepository extends ServiceEntityRepository
         if (!empty($search->string)) {
             $query = $query
                 ->andWhere('p.name LIKE :string')
-                ->setParameter('string', "%$search->string%");
+                ->setParameter('string', "%{$search->string}%");
         }
 
         return $query->getQuery()->getResult();
+
     }
 
     // /**
