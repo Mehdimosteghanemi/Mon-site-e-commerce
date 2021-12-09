@@ -94,3 +94,8 @@ body {
     color: #FD7272;
     text-decoration: none;
 }
+
+.block-small a.nounderline {
+    text-decoration: none;
+    color: ffffff;
+}
