@@ -5,16 +5,44 @@
 {% block content %}
 
     <h1>Mon compte</h1>
-
-    Bienvenue {{ app.user.firstname }} dans votre compte. <br>
+    
+    Bienvenue <strong>{{ app.user.firstname }}</strong> dans votre compte. <br>
     C'est dans cet espace que vous allez pouvoir gérer vos informations personnelles.
     <hr>
     
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="/admin">Vous êtes un administrateur, accéder au backoffice</a><br/>
-    {% endif %}
-    <a href=" {{path('account_password')}} ">Modifier mon mot de passe</a><br/>
-    <a href=" {{path('account_address')}} ">Gérer mes addresses</a><br/>
-    <a href=" {{path('account_order')}} ">Mes commandes</a>
     
+    <div class="row">
+        <div class="col-md-6">
+            <div class="account-item">
+                <img src="{{ asset('assets/img/password.png') }}" alt="Modifier mon mot de passe"><br/>
+                <a href="{{path('account_password')}}">Modifier mon mot de passe</a><br/>
+                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="account-item">
+                <img src=" {{ asset('assets/img/address.png') }}" alt="Gérer mes addresses"><br/>
+                <a href=" {{path('account_address')}} ">Gérer mes addresses</a><br/>
+                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="account-item">
+                <img src=" {{ asset('assets/img/order.png') }}" alt="Mes commandes"><br/>
+                <a href=" {{path('account_order')}} ">Mes commandes</a>
+                
+            </div>
+        </div>
+        
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-md-6">
+                <div class="account-item">
+                    <img src=" {{ asset('assets/img/backoffice.png') }}" alt="Accéder au backoffice"><br/>
+                    <small></small><a href="/admin">Accéder au backoffice</a><br/></small>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
 {% endblock %}
