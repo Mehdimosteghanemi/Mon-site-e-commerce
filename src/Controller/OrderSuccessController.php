@@ -41,8 +41,7 @@ class OrderSuccessController extends AbstractController
             // Envoyer un email à notre client pour lui confirmer sa commande
             $mail = new Mail();
                 
-            $content = "Bonjour ".$order->getUser()->getFirstname()."<br/>Merci pour votre commande.<br><br/>Profitez bien de vos artciles.<br><br/>
-            Avec le code promo BIENVENUE2021";
+            $content = "Bonjour ".$order->getUser()->getFirstname()."<br/>Merci pour votre commande.<br><br/>Profitez bien de vos articles.<br><br/>";
             $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande Ma petite boutique est bien validée !', $content);
 
         }
